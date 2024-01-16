@@ -9,3 +9,7 @@ This project will contain the list of places based on the statistical analysis a
 FEATURES
 
 It will contain list of places with worst review it can get from visitors.
+
+this is updated file to be pulled into S47_NKR_PLU2
+
+
