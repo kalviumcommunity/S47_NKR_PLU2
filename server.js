@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 
 // Define a route
-app.get('/', (req, res) => {
+app.get('/ping', (req, res) => {
   res.json({ message: 'Hello, Nayan here!',
   name: 'Nayan',
   country: 'USA',
