@@ -4,11 +4,6 @@ const express = require('express');
 // Create an instance of Express
 const app = express();
 
-app.use((req, res, next) => {
-    res.setHeader('Cache-Control', 'no-store');
-    next();
-});
-
 // Define a route
 app.get('/', (req, res) => {
   res.json({ message: 'Hello, Nayan here!',
