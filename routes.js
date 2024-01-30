@@ -59,7 +59,7 @@ app.delete('/ping/:index', (req, res) => {
   const index = req.params.index;
 
   if (index >= 0 && index < jsondata.length) {
-    jsondata.splice(index, 1); 
+    jsondata.splice(index, 1);
     res.json(jsondata);
   } else {
     res.status(404).send('Index not found');
