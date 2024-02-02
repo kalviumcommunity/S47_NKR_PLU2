@@ -13,3 +13,4 @@ It will contain list of places with worst review it can get from visitors.
 this is updated file to be pulled into S47_NKR_PLU2
 
 
+DEPLOYED LINK CLOUDFARE:  https://s47-nkr-plu2-0.pages.dev/
