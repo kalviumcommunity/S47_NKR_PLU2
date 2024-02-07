@@ -12,7 +12,7 @@ const Usercard = () => {
         const recieved = await response.data;
         setuserdata(recieved);
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     };
     fetchdata();

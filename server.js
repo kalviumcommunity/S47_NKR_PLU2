@@ -1,7 +1,7 @@
 // Import required modules
 const express = require('express');
 const { MongoClient } = require('mongodb');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const cors = require('cors')
 
 const app = express();
@@ -10,7 +10,7 @@ app.use(cors())
 
 const uri = 'mongodb+srv://NAYANKUMARRAJ:nkr2580@my-first-cluster.hz1puza.mongodb.net/?retryWrites=true&w=majority';
 
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const client = new MongoClient(uri);
 
 client.connect()
   .then(() => {
