@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import DestinationCard from './Destination';
 import destinationdata from './destinationdata.json';
 import Usercard from './Usercard';
+import Forms from './Forms';
+import UpdateCard from './updateCard';
 
 const App = () => {
   return (
@@ -32,6 +34,8 @@ const App = () => {
               </div>
             </>
           } />
+          <Route path='/add-user' element={<Forms/>} />
+          <Route path='/edit-user' element={<UpdateCard/>} />
         </Routes>
       </div>
     </Router>
