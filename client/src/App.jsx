@@ -5,6 +5,7 @@ import destinationdata from './destinationdata.json';
 import Usercard from './Usercard';
 import Forms from './Forms';
 import UpdateCard from './updateCard';
+import Login from './login/Login';
 
 const App = () => {
   return (
@@ -17,6 +18,9 @@ const App = () => {
             </li>
             <li>
               <Link to="/users">Users</Link>
+            </li>
+            <li>
+              <Link to='/login'>Profile</Link>
             </li>
           </ul>
         </nav>
@@ -36,6 +40,7 @@ const App = () => {
           } />
           <Route path='/add-user' element={<Forms/>} />
           <Route path='/edit-user' element={<UpdateCard/>} />
+          <Route path='/login' element={<Login/>} />
         </Routes>
       </div>
     </Router>
