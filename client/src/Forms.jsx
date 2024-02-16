@@ -1,5 +1,5 @@
 // UserForm.js
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./forms.css"; // Import the CSS file
@@ -31,7 +31,12 @@ const Forms = () => {
       // Redirect to "/users" with a success message
       navigate("/users", { state: { successMessage: "User added successfully!" } });
     } catch (error) {
-      console.error("Error posting data:", error);
+      // console.error("Error posting data:", error.response.data);
+      const message = error.response.data.error.details;
+      // console.log(message)
+      message.map((value)=>{
+        alert(value.message)
+      })
     }
   };
 
@@ -67,5 +72,4 @@ const Forms = () => {
     </form>
   );
 };
-
 export default Forms;

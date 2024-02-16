@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const User = require('./user.js');
 const cors = require('cors')
+const Joi = require('joi');
 
 
 const app = express();
@@ -34,12 +35,28 @@ mongoose.connect('mongodb+srv://NAYANKUMARRAJ:nkr2580@my-first-cluster.hz1puza.m
       res.header({
         "Access-Control-Allow-Origin": "*",
       })
+
+      const schema = Joi.object({
+        name: Joi.string().alphanum().min(3).max(30).required().label('Userame'),
+        email: Joi.string().email().required().label('Email'),
+      }).options({abortEarly: false});
+
       const userData = req.body; // Get user data from the request body
-      try {
-        const createdUser = await User.create(userData); // Create a new user
-        res.status(201).json(createdUser); // Respond with the created user
-      } catch (error) {
-        res.status(500).json({ message: 'Error creating user', error: error.message }); // Respond with an error message
+      console.log('request body:  ',userData)
+      const { error, value } = schema.validate(userData);
+      if (error) {
+        console.log(error)
+        res.status(400).json({ error });
+      }
+      else {
+        try {
+          console.log("validated value:  ",value)
+          const createdUser = await User.create(value); // Create a new user
+          console.log('user created:  ',createdUser)
+          res.status(201).json(createdUser); // Respond with the created user
+        } catch (error) {
+          res.status(500).json({ message: 'Error creating user', error: error.message }); // Respond with an error message
+        }
       }
     });
 
