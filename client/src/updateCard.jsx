@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './UpdateCard.css'; // Import CSS file for styling
+import Cookies from 'js-cookie';
 
 const UpdateCard = () => {
     const location = useLocation();
@@ -10,6 +11,9 @@ const UpdateCard = () => {
 
     const [userName, setUserName] = useState(user?.name);
     const [userEmail, setUserEmail] = useState(user?.email);
+    const token = Cookies.get('token');
+    console.log(token);
+
 
     const updateuser = (event) => {
         const name = event.target.name;
@@ -24,10 +28,18 @@ const UpdateCard = () => {
 
     function handleFormSubmit(event) {
         event.preventDefault();
-        axios.put(`http://localhost:3000/users/${user._id}`, { name: userName, email: userEmail })
-            .then(res => console.log(res.data))
-            .catch(err => console.log(err));
-        navigate('/users');
+        axios.put(`http://localhost:3000/users/${user._id}`, { name: userName, email: userEmail }, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(res => {
+                console.log(res.data)
+                navigate('/users')})
+            .catch(err => {
+                console.log(err)
+                alert(err.response.data.message)
+            });
     }
 
     return (
