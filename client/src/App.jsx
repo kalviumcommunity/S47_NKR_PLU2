@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Routes, useLocation } from 'react-router-dom';
 import DestinationCard from './Destination';
 import destinationdata from './destinationdata.json';
 import Usercard from './Usercard';
@@ -8,6 +8,9 @@ import UpdateCard from './updateCard';
 import Login from './login/Login';
 
 const App = () => {
+  // const location = useLocation();
+  // const loggedinas = location.state?.loggedinas;
+  // console.log(loggedinas);
   return (
     <Router>
       <div className="app-container">

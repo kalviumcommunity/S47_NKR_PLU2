@@ -2,7 +2,9 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./forms.css"; // Import the CSS file
+import "./forms.css";
+import Cookies from 'js-cookie';
+
 
 const Forms = () => {
   const navigate = useNavigate();
@@ -11,6 +13,9 @@ const Forms = () => {
     name: "",
     email: "",
   });
+
+  const token = Cookies.get('admin');
+  // console.log(token);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,7 +29,11 @@ const Forms = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3000/users", formData);
+      const response = await axios.post("http://localhost:3000/users", formData,{
+        headers: {
+          'Authorization': `Bearer ${token}`
+      }
+      });
       const receivedData = response.data;
       console.log("Server response:", receivedData);
 
