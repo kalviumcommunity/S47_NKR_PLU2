@@ -5,7 +5,6 @@ const User = require('./user.js');
 const cors = require('cors')
 const Joi = require('joi');
 
-
 const app = express();
 const PORT = 3000;
 app.use(express.json()); // Add this middleware to parse JSON in the request body
@@ -15,19 +14,14 @@ mongoose.connect('mongodb+srv://NAYANKUMARRAJ:nkr2580@my-first-cluster.hz1puza.m
   .then(() => {
     console.log('Connected to the database');
 
-    // Add a route to handle GET requests for retrieving all users
     app.get('/', async (req, res) => {
-      res.header({
-      "Access-Control-Allow-Origin": "*"
-      })
       try {
-        const users = await User.find(); // Retrieve all users from the database
-        res.json(users); // Return the list of users as JSON
+        const users = await User.find(); 
+        res.json(users); 
       } catch (error) {
-        res.status(500).json({ message: error.message }); // Handle any errors
+        res.status(500).json({ message: error.message });
       }
     });
-
     //***************************************************************************/
 
     // POST route to create a new user
@@ -78,6 +72,43 @@ mongoose.connect('mongodb+srv://NAYANKUMARRAJ:nkr2580@my-first-cluster.hz1puza.m
       }
     });
 
+    // POST route to login
+    app.post('/login', async (req, res) => {
+      const schema = Joi.object({
+        name: Joi.string().alphanum().min(3).max(30).required().label('Username'),
+        email: Joi.string().email().required().label('Email'),
+        password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required().label('Password'),
+      }).options({ abortEarly: false });
+    
+      const userData = req.body;
+    
+      const { error, value } = schema.validate(userData);
+    
+      if (error) {
+        res.status(400).json({ message: 'Validation failed', errors: error.details });
+        return;
+      }
+    
+      const { name, email, password } = value;
+    
+      try {
+        const findUser = await User.findOne({ name, email });
+        if (!findUser) {
+          res.status(404).json({ message: 'user not found' });
+          return;
+        }
+        res.cookie('username', name);
+        res.status(200).json({message: 'user found and logged in'});
+      } catch (err) {
+        res.status(500).json({ message: 'Error', error: err.message });
+      }
+    });
+
+    app.get('/logout', (req, res) => {
+      res.clearCookie('username');
+      res.status(200).send({ message: 'Logged out successfully' });
+    });
+    
     //********************************************************/
 
     // DELETE route to delete a user by ID
