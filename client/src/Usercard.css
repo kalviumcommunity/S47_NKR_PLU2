@@ -69,3 +69,141 @@
 .usercard:hover {
   transform: scale(1.05);
 }
+
+.select-dropdown {
+  margin: 50px;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.select-dropdown:hover,
+.select-dropdown:focus {
+  border-color: #45a049;
+}
+
+
+
+
+/********************************/
+/*
+
+.user-input-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.edit-form button,
+.button-container button,
+.adduser {
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.edit-form button:hover,
+.button-container button:hover {
+  background-color: #45a049;
+}
+
+.edit-form button,
+.button-container button {
+  margin-right: 5px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.usercard-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.usercard {
+  width: 100%;
+  background: linear-gradient(
+    135deg,
+    #150c28,
+    #3a006d,
+    #770073,
+    #a14da0,
+    #f04186
+  );
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  font-size: 14px;
+}
+
+.usercard h1 {
+  margin: 5px 0;
+}
+
+.usercard:hover {
+  transform: scale(1.05);
+}
+
+.select-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.select-container select {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.select-container select:hover,
+.select-container select:focus {
+  border-color: #45a049;
+}
+
+.adduser-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.adduser {
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.adduser:hover {
+  background-color: #45a049;
+}
+*/

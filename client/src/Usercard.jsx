@@ -5,38 +5,36 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const Usercard = () => {
-  const [userdata, setuserdata] = useState([]);
-  const [click, setclick] = useState(true);
+  const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [click, setClick] = useState(true);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchdata = async () => {
+    const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/");
-        const recieved = await response.data;
-        setuserdata(recieved);
+        const response = await axios.get("http://localhost:3000");
+        setUsers(response.data);
       } catch (error) {
         console.log(error);
       }
     };
-    fetchdata();
+    fetchUsers();
   }, [click]);
 
   const editUser = (user) => {
     navigate('/edit-user', {
-      state: {user}
-    })
+      state: { user }
+    });
   };
 
-  const deleteuser = async (id) => {
+  const deleteUser = async (id) => {
     const confirmed = window.confirm("Are you sure you want to delete this user?");
     if (confirmed) {
       try {
-        const response = await axios.delete(`http://localhost:3000/users/${id}`);
-        const received = await response.data;
-        console.log(received);
-        setclick(!click);
+        await axios.delete(`http://localhost:3000/users/${id}`);
+        setClick(!click);
       } catch (error) {
         console.log(error);
       }
@@ -45,21 +43,42 @@ const Usercard = () => {
 
   return (
     <>
-    <Link to="/add-user"><button className="adduser">Add User</button></Link>
-      <div className="usercard-container">
-        {userdata.map((card, index) => (
-          <div key={index} className="usercard">
-            <h1>ID: {card._id}</h1>
-                <h1>NAME: {card.name}</h1>
-                <h1>EMAIL: {card.email}</h1>
-                <div className="button-container">
-                  <button onClick={() => editUser(card)}>Edit</button>
-                  <button onClick={() => deleteuser(card._id)}>Delete</button>
-                </div>
-          </div>
+      <Link to="/add-user"><button className="adduser">Add User</button></Link>
+      <select className="select-dropdown" onChange={(e) => e.target.value? setSelectedUser(JSON.parse(e.target.value)) : setSelectedUser(null)}>
+        <option value=''>Select a user</option>
+        {users.map((user) => (
+          <option key={user._id} value={JSON.stringify(user)}>
+            {user.name}
+          </option>
         ))}
+      </select>
+      <div className="usercard-container">
+        {selectedUser ? (
+          <div className="usercard">
+            <h1>ID: {selectedUser._id}</h1>
+            <h1>NAME: {selectedUser.name}</h1>
+            <h1>EMAIL: {selectedUser.email}</h1>
+            <div className="button-container">
+              <button onClick={() => editUser(selectedUser)}>Edit</button>
+              <button onClick={() => deleteUser(selectedUser._id)}>Delete</button>
+            </div>
+          </div>
+        ) : (
+          users.map((user) => (
+            <div key={user._id} className="usercard">
+              <h1>ID: {user._id}</h1>
+              <h1>NAME: {user.name}</h1>
+              <h1>EMAIL: {user.email}</h1>
+              <div className="button-container">
+                <button onClick={() => editUser(user)}>Edit</button>
+                <button onClick={() => deleteUser(user._id)}>Delete</button>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </>
   );
 };
+
 export default Usercard;

@@ -14,7 +14,6 @@ const UpdateCard = () => {
     const token = Cookies.get('token');
     console.log(token);
 
-
     const updateuser = (event) => {
         const name = event.target.name;
         const value = event.target.value;
