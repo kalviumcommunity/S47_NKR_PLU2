@@ -2,6 +2,8 @@ import { useState } from 'react';
 import './Login.css'; 
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -41,6 +43,8 @@ const Login = () => {
             console.log(response.data.message);
             setloginbool(true)
             setlogoutbool(false)
+            Cookies.remove('token');
+
         })
         .catch(error => {
             console.error(error.response.data);

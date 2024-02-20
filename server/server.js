@@ -95,11 +95,11 @@ app.put('/users/:id', async (req, res) => {
   if (typeof userId !== 'string' || typeof decoded.userId !== 'string') {
     return res.status(400).json({ message: 'Invalid user ID format.' });
   }
-
+  
   if (decoded.userId !== userId) {
     return res.status(401).json({ message: 'Unauthorized: cannot update other users' });
   }
-
+  
   try {
     const updatedUser = await User.findByIdAndUpdate(userId, newData, { new: true }); // Find a user by ID and update with the new data
     if (updatedUser) {
@@ -114,7 +114,7 @@ app.put('/users/:id', async (req, res) => {
 
 
     //****************************LOGIN***************************************** */
-
+  
     // POST route to login
     app.post('/login', async (req, res) => {
       const schema = Joi.object({
